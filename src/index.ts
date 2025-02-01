@@ -42,7 +42,6 @@ const swaggerDefinition = {
   ],
 };
 const options = {
-  
   swaggerDefinition,
   apis: [
     "./src/routes/*.ts", // Matches: /routes/users.ts
@@ -67,6 +66,11 @@ app.use(cors(corOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.disable("x-powered-by");
+
+// Add default route for root URL
+app.get("/", (req, res) => {
+  res.json({ message: "API is running successfully!" });
+});
 
 // Swagger UI setup
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
