@@ -13,7 +13,7 @@ const validate =
       });
       next();
     } catch (error: any) {
-      APIResponse.error;
+      APIResponse.error(error.issues[0].message, 400).send(res);
     }
   };
 
